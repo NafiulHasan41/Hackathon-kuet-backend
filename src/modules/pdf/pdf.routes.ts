@@ -9,4 +9,4 @@ router.get("/pdf/public/:userId", getPublicPdfsHandler);
 router.delete("/pdf/:pdfId", deletePdfHandler);
 router.put("/pdf/:pdfId", updatePdfHandler);
 
-export default router;
+export const pdfRouter = router;
