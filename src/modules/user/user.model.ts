@@ -1,16 +1,15 @@
-import  { Schema, model } from "mongoose";
+import { Schema, model } from "mongoose";
 import { IUser, IUser_Document } from "./user.interface";
 import bcrypt from "bcrypt";
-import config from "../config";
-
+import config from "../../config";
 
 const UserSchema: Schema<IUser> = new Schema(
   {
     name: { type: String, required: true },
-    email: { type: String, unique: true, sparse: true }, 
+    email: { type: String, unique: true, sparse: true },
     phone: { type: String, unique: true, sparse: true },
     password: { type: String, required: true },
-    role: { type: String, enum: ["user","admin"], default: "user" },
+    role: { type: String, enum: ["user", "admin"], default: "user" },
     imageURL: { type: String },
     location: {
       type: {
@@ -44,7 +43,5 @@ UserSchema.post("find", function (docs: any[], next: (err?: any) => void) {
   docs.forEach((doc) => (doc.password = "********"));
   next();
 });
-
-
 
 export const UserModel = model<IUser>("User", UserSchema);
