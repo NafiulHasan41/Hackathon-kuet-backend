@@ -16,7 +16,7 @@ export const savePdfHandler = async (req: Request, res: Response) => {
     try {
       const userId = req.user?.id;
       if (!userId) {
-        return res.status(401).json({ error: "Unauthorized" });
+         res.status(401).json({ error: "Unauthorized" });
       }
       const result = await getPdfByUser(userId);
       res.status(200).json(result);
@@ -40,7 +40,7 @@ export const savePdfHandler = async (req: Request, res: Response) => {
       const userId = req.user?.id;
       const result = await deletePdf(req.params.pdfId , userId);
       if (!result) {
-        return res.status(404).json({ error: "PDF not found or unauthorized" });
+         res.status(404).json({ error: "PDF not found or unauthorized" });
       }
       res.status(200).json({ message: "PDF deleted successfully" });
     } catch (error:any) {
@@ -53,10 +53,12 @@ export const savePdfHandler = async (req: Request, res: Response) => {
         const userId = req.user?.id;
       const result = await updatePdf(req.params.pdfId, userId , req.body);
       if (!result) {
-        return res.status(404).json({ error: "PDF not found or unauthorized" });
+         res.status(404).json({ error: "PDF not found or unauthorized" });
       }
       res.status(200).json(result);
     } catch (error: any) {
       res.status(400).json({ error: error.message });
     }
   };
+
+  
