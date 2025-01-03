@@ -15,6 +15,7 @@ export const savePdfHandler = async (req: Request, res: Response) => {
   export const getPdfByUserHandler = async (req: Request, res: Response) => {
     try {
       const userId = req.user?.id;
+      // console.log(userId);
       if (!userId) {
          res.status(401).json({ error: "Unauthorized" });
       }

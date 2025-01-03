@@ -34,11 +34,24 @@ export const protect = async (
       token,
       process.env.JWT_SECRET || ""
     ) as JwtPayload;
+    
+    // console.log("decoded",decoded);
+
+    let user ; 
 
     // Find the user in the database using email or phone
-    const user = await UserModel.findOne({
-      $or: [{ email: decoded.email }, { phone: decoded.phone }],
-    });
+    if(decoded?.email)
+    {
+      user = await UserModel.findOne({ email: decoded.email });
+
+    }
+    else if(decoded?.phone)
+    {
+      user = await UserModel.findOne({ phone: decoded.phone });
+    }
+    
+
+    // console.log(user);
 
     if (!user) {
       res.status(401).json({ message: "Unauthorized: User not found" });
