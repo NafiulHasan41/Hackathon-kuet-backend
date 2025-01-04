@@ -3,6 +3,7 @@ import cors from "cors";
 import { userRoutes } from "./modules/user/user.routes";
 import { pdfRouter } from "./modules/pdf/pdf.routes";
 import { searchRouter } from "./modules/search/search.routes";
+import { metricRoute } from "./modules/metrics/metric.route";
 
 
 const app: Application = express();
@@ -15,6 +16,7 @@ app.use(cors());
 app.use("/api/users", userRoutes);
 app.use("/api/pdfs", pdfRouter);
 app.use("/api", searchRouter);
+app.use("/api", metricRoute);
 
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
